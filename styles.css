@@ -4,3 +4,9 @@
 .hello{
 	text-align: center;
 }
+div{
+	font-weight: bold;
+}
+div{
+	font-style: italic;
+}
