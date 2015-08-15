@@ -1,12 +1,22 @@
+/*
+* Example stylesheet
+*/
 .hi{
 	font-family: Arial,"Helvetica";
 }
 .hello{
 	text-align: center;
 }
+/*
+* Test of multi-line comment
+*/
 div{
 	font-weight: bold;
+	/*
+	* Test of multi-line comment
+	*/
 }
 div{
+	/*test of repetitive selectors*/
 	font-style: italic;
 }
