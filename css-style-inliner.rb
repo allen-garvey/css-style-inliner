@@ -14,6 +14,9 @@ end
 def get_class_attribute(element_opening_tag)
 	return element_opening_tag.scan(/class=['"].+['"]/)[0]
 end
+def strip_css_comments(css_string)
+	return css_string.gsub(/[\n\t]/, '').gsub(/\*\//, "*/\n").gsub(/\/\*.*\*\//, '')
+end
 
 
 INPUT_HTML_PATH = "./test.html"
@@ -22,6 +25,9 @@ STYLESHEET_PATH = "./styles.css"
 # read files
 raw_html = File.read(INPUT_HTML_PATH)
 styles = File.read(STYLESHEET_PATH)
+
+# strip comments
+styles = strip_css_comments(styles)
 
 # format the stylesheet one line per class so that the regex will work properly
 styles.gsub!(/[\s\t]/, "").gsub!('}', "}\n")
