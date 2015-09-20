@@ -5,11 +5,14 @@ CSS Style Inliner is a Ruby script to aid HTML email development by taking a sty
 ##Dependencies
 
 * Ruby 2.*
+* Nokogiri
 
 ##Getting Started
 
 * Download or clone the project and `cd` into the project directory
+* If you don't have Nokogiri already installed, type `gem install nokogiri`
 * Type `ruby css-style-inliner.rb` to run the script with the sample input files
+* Edit the `INPUT_HTML_PATH` constant inside the ` css-style-inliner.rb` file to point to your HTML file
 
 ##License
 
