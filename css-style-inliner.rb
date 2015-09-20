@@ -40,7 +40,7 @@ end
 
 #apply all styles to temporary attribute so that it won't overwrite existing style attributes so
 #styles can be added according to css priority
-css_styles.each do |css|
+css_styles.sort.each do |css|
 	page.css(css.selector).each do |element|
 		current_temp_style = element[TEMP_STYLE_ATTRIBUTE_NAME] || ''
 		element[TEMP_STYLE_ATTRIBUTE_NAME] = current_temp_style + css.style
