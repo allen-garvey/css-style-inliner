@@ -1,4 +1,5 @@
 # replaces html classes with inline css
+#use single quotes in CSS to get nicer output (e.g. font-family)
 
 require 'nokogiri'
 load 'css.rb'
@@ -7,11 +8,11 @@ INPUT_HTML_PATH = "./test.html" #change to the path to your html file you want t
 TEMP_STYLE_ATTRIBUTE_NAME = 'inliner_style'
 
 def strip_css_comments(css_string)
-	css_string.gsub(/[\n\t]/, '').gsub(/\*\//, "*/\n").gsub(/\/\*.*\*\//, '')
+	css_string.gsub(/[\n\t]/, '').gsub(/\*\//, "*/\n").gsub(/\/\*.*\*\//, '').gsub(/^\s+/, "")
 end
 def preprocess_css(css_string)
 	# format the stylesheet one line per class so that the regex will work properly
-	strip_css_comments(css_string).gsub(/[\s\t]/, "").gsub('}', "}\n")
+	strip_css_comments(css_string).gsub(/[\n\t]/, "").gsub('}', "}\n")
 end
 
 
@@ -28,8 +29,10 @@ css_styles = []
 style_tags.each do |style_tag|
 	style_sheet_path = style_tag['href']
 	styles = File.read(style_sheet_path)
+	# puts strip_css_comments(styles)
+	# puts "\nafter\n"
 	styles = preprocess_css(styles)
-
+	# puts styles
 	styles.split("\n").each do |line|
 		css_styles << CSS::CSSStyle.new(line)
 	end
