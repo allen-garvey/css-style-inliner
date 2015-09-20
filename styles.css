@@ -8,6 +8,15 @@
 	text-align: center;
 	margin: 0 auto;
 }
+.hi .hello{
+	text-align: center;
+}
+#hello{
+	padding: 0;
+}
+.hi > div{
+	display: inline-block;
+}
 /*
 * Test of multi-line comment
 */
