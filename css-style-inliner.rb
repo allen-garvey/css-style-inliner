@@ -3,6 +3,9 @@
 require 'nokogiri'
 load 'css.rb'
 
+INPUT_HTML_PATH = "./test.html" #change to the path to your html file you want the css to inline
+TEMP_STYLE_ATTRIBUTE_NAME = 'inliner_style'
+
 def strip_css_comments(css_string)
 	css_string.gsub(/[\n\t]/, '').gsub(/\*\//, "*/\n").gsub(/\/\*.*\*\//, '')
 end
@@ -11,10 +14,6 @@ def preprocess_css(css_string)
 	strip_css_comments(css_string).gsub(/[\s\t]/, "").gsub('}', "}\n")
 end
 
-
-INPUT_HTML_PATH = "./test.html"
-
-TEMP_STYLE_ATTRIBUTE_NAME = 'inliner_style'
 
 # read html and get all linked css
 page = Nokogiri::HTML(open(INPUT_HTML_PATH))
