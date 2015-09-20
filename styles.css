@@ -2,7 +2,7 @@
 * Example stylesheet
 */
 .hi{
-	font-family: Arial,"Helvetica";
+	font-family: Arial,"Helvetica", 'Helvetica Neue', sans-serif;
 }
 .hello{
 	text-align: center;
