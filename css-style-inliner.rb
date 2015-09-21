@@ -6,6 +6,8 @@ load 'css.rb'
 
 INPUT_HTML_PATH = "./test.html" #change to the path to your html file you want the css to inline
 TEMP_STYLE_ATTRIBUTE_NAME = 'inliner_style'
+RESET_TABLE_STYLES = false
+RESET_MSO = false
 
 def strip_css_comments(css_string)
 	css_string.gsub(/[\n\t]/, '').gsub(/\*\//, "*/\n").gsub(/\/\*.*\*\//, '').gsub(/^\s+/, "")
@@ -54,6 +56,23 @@ page.css('[inliner_style]').each do |element|
 end
 #remove temporary inline styles
 page.xpath("//@#{TEMP_STYLE_ATTRIBUTE_NAME}").remove
+
+
+if RESET_TABLE_STYLES
+	page.css('table').each do |table|
+		table['cellpadding'] = 0
+		table['cellspacing'] = 0
+		table['border'] = 0
+		unless table['align']
+			table['align'] = 'center'
+		end
+	end
+end
+
+#reset line-height for outlook 2010 and higher
+if RESET_MSO
+	page.css('head').first.add_child("<!--[if gte mso 12]>\n<style>\n\ttd{mso-line-height-rule:exactly;}</style>\n<![endif]-->")
+end
 
 # output html with inline styles
 puts page
